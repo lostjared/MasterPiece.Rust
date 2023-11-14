@@ -6,15 +6,15 @@
 mod puzzle;
 mod scores;
 
+use puzzle::game;
+use puzzle::game::Grid;
+use rand::Rng;
 use sdl2::event::Event;
 use sdl2::keyboard::Keycode;
 use sdl2::pixels::Color;
 use sdl2::rect::Rect;
 use sdl2::render::TextureQuery;
 use std::time::{SystemTime, UNIX_EPOCH};
-use puzzle::game::Grid;
-use puzzle::game;
-use rand::Rng;
 
 #[derive(PartialEq)]
 enum Screen {
@@ -99,7 +99,7 @@ fn load_blocks(
 fn draw_grid(
     grid: &game::Grid,
     can: &mut sdl2::render::Canvas<sdl2::video::Window>,
-    blocks:&[sdl2::render::Texture],
+    blocks: &[sdl2::render::Texture],
 ) {
     let offset_x = 185;
     let offset_y = 95;
@@ -113,7 +113,12 @@ fn draw_grid(
                 can.copy(
                     b,
                     None,
-                    Some(Rect::new(x as i32 * 32 + offset_x, (y as i32 * 16) + offset_y, 32, 16)),
+                    Some(Rect::new(
+                        x as i32 * 32 + offset_x,
+                        (y as i32 * 16) + offset_y,
+                        32,
+                        16,
+                    )),
                 )
                 .expect("on copy block");
             } else if color < 0 {
@@ -181,8 +186,6 @@ fn draw_grid(
     )
     .expect("draw rect");
 }
-
-
 
 fn main() -> std::io::Result<()> {
     let mut width = 1440;
@@ -429,11 +432,27 @@ fn main() -> std::io::Result<()> {
                         .copy(&images[2], None, None)
                         .expect("on copy");
 
-                    printtext(texture_canvas, &texture_creator, &small_font, 200, 60, Color::RGB(255,255,255), &format!("Score: {}", grid.score));
-                    printtext(texture_canvas, &texture_creator, &small_font, 310, 60, Color::RGB(255,0,0), &format!("Tabs: {}", grid.lines));
+                    printtext(
+                        texture_canvas,
+                        &texture_creator,
+                        &small_font,
+                        200,
+                        60,
+                        Color::RGB(255, 255, 255),
+                        &format!("Score: {}", grid.score),
+                    );
+                    printtext(
+                        texture_canvas,
+                        &texture_creator,
+                        &small_font,
+                        310,
+                        60,
+                        Color::RGB(255, 0, 0),
+                        &format!("Tabs: {}", grid.lines),
+                    );
                     draw_grid(&grid, texture_canvas, &blocks);
                 });
-                
+
                 if tick_count > difficulty {
                     grid.move_down();
                     tick_count = 0;
@@ -459,7 +478,8 @@ fn main() -> std::io::Result<()> {
                         Color::RGB(255, 255, 255),
                         "[ Press Escape to Return ]",
                     );
-                    let diff_str = vec!["Difficulty: Easy", "Difficulty: Normal", "Difficulty: Hard"];
+                    let diff_str =
+                        vec!["Difficulty: Easy", "Difficulty: Normal", "Difficulty: Hard"];
                     printtext(
                         texture_canvas,
                         &texture_creator,
@@ -512,11 +532,42 @@ fn main() -> std::io::Result<()> {
                     texture_canvas
                         .fill_rect(sdl2::rect::Rect::new(35, 82, 621 - 35, 440 - 70))
                         .expect("on draw rect");
-                    printtext(texture_canvas, &texture_creator, &font, 175, 100, Color::RGB(255,255,255), "MasterPiece - [ Rust Edition ]");
-                    printtext(texture_canvas, &texture_creator, &font,75, 150, Color::RGB(255,255,0), "Programmed by Jared Bruni");
-                    printtext(texture_canvas, &texture_creator, &font,75, 175, Color::RGB(0,255,0), "LostSideDead Software");
-                    printtext(texture_canvas, &texture_creator, &font,75, 200, Color::RGB(255,0,0), "Open Source, Open Mind");
-
+                    printtext(
+                        texture_canvas,
+                        &texture_creator,
+                        &font,
+                        175,
+                        100,
+                        Color::RGB(255, 255, 255),
+                        "MasterPiece - [ Rust Edition ]",
+                    );
+                    printtext(
+                        texture_canvas,
+                        &texture_creator,
+                        &font,
+                        75,
+                        150,
+                        Color::RGB(255, 255, 0),
+                        "Programmed by Jared Bruni",
+                    );
+                    printtext(
+                        texture_canvas,
+                        &texture_creator,
+                        &font,
+                        75,
+                        175,
+                        Color::RGB(0, 255, 0),
+                        "LostSideDead Software",
+                    );
+                    printtext(
+                        texture_canvas,
+                        &texture_creator,
+                        &font,
+                        75,
+                        200,
+                        Color::RGB(255, 0, 0),
+                        "Open Source, Open Mind",
+                    );
                 });
             }
             Screen::Start => {
