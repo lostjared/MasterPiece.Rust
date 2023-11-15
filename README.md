@@ -14,13 +14,13 @@ Just started this project so its got some work to be done!
 
 Screen shots
 
-![ScreenShot](https://github.com/lostjared/MasterPiece.SDL/blob/main/screens/start.jpg?raw=true "screenshot1")
+![ScreenShot](https://github.com/lostjared/MasterPiece.Rust/blob/main/screens/start.jpg?raw=true "screenshot1")
 
 
-![ScreenShot](https://github.com/lostjared/MasterPiece.SDL/blob/main/screens/opt.jpg?raw=true "screenshot2")
+![ScreenShot](https://github.com/lostjared/MasterPiece.Rust/blob/main/screens/opt.jpg?raw=true "screenshot2")
 
 
-![ScreenShot](https://github.com/lostjared/MasterPiece.SDL/blob/main/screens/credits.jpg?raw=true "screenshot3")
+![ScreenShot](https://github.com/lostjared/MasterPiece.Rust/blob/main/screens/credits.jpg?raw=true "screenshot3")
 
 
-![ScreenShot](https://github.com/lostjared/MasterPiece.SDL/blob/main/screens/game.jpg?raw=true "screenshot4")
+![ScreenShot](https://github.com/lostjared/MasterPiece.Rust/blob/main/screens/game.jpg?raw=true "screenshot4")
