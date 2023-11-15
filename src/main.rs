@@ -241,7 +241,7 @@ fn main() -> std::io::Result<()> {
     let mut grid = Grid::new(8, 17);
     let mut difficulty = 1000;
     let mut final_score = 0;
-    
+
     'main: loop {
         for _event in e.poll_iter() {
             match _event {
@@ -618,6 +618,24 @@ fn main() -> std::io::Result<()> {
                     texture_canvas
                         .fill_rect(sdl2::rect::Rect::new(35, 82, 621 - 35, 440 - 70))
                         .expect("on draw rect");
+                    printtext(
+                        texture_canvas,
+                        &texture_creator,
+                        &font,
+                        175,
+                        100,
+                        Color::RGB(255, 255, 255),
+                        "MasterPiece - [ Game Over ]",
+                    );
+                    printtext(
+                        texture_canvas,
+                        &texture_creator,
+                        &small_font,
+                        75,
+                        150,
+                        Color::RGB(0, 255, 0),
+                        &format!("Final Score: {}", final_score),
+                    );
                 });
             }
         }
