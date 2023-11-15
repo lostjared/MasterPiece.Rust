@@ -402,32 +402,33 @@ fn main() -> std::io::Result<()> {
                     Screen::Intro => {
                         screen = Screen::Start;
                     }
-                    _ => {}
-                },
-
-                Event::KeyDown { keycode: key, .. } => {
-                    if screen == Screen::GameOver {
-                        if key == Some(Keycode::Backspace) {
-                            score_menu.input.pop();
-                        }
-                        if key == Some(Keycode::Return) {
-                            //enter
-                            if !score_menu.input.is_empty() {
-                                let s = (String::from(&score_menu.input), final_score);
-                                score_menu.scores.push(s);
-                                score_menu.sort_scores();
-                                score_menu.input = String::new();
-                                final_score = 0;
-                            }
+                    Screen::GameOver => {
+                        if !score_menu.input.is_empty() {
+                            let s = (String::from(&score_menu.input), final_score);
+                            score_menu.scores.push(s);
+                            score_menu.sort_scores();
+                            score_menu.input = String::new();
+                            final_score = 0;
+                            score_menu.save();
                         }
                     }
-                }
+                    _ => {}
+                },
+                Event::KeyDown {
+                    keycode: Some(Keycode::Backspace),
+                    ..
+                } => match screen {
+                    Screen::GameOver => {
+                        score_menu.input.pop();
+                    }
+                    _ => {}
+                },
                 Event::TextInput {
                     timestamp: _,
                     window_id: _,
                     text: s,
                 } => {
-                    if screen == Screen::GameOver {
+                    if screen == Screen::GameOver && final_score > 0 {
                         score_menu.type_key(&s);
                     }
                 }
@@ -650,20 +651,22 @@ fn main() -> std::io::Result<()> {
                         texture_canvas,
                         &texture_creator,
                         &font,
-                        175,
+                        100,
                         100,
                         Color::RGB(255, 255, 255),
-                        "MasterPiece - [ Game Over ]",
+                        "MasterPiece - [ Game Over Escape to Return ]",
                     );
-                    printtext(
-                        texture_canvas,
-                        &texture_creator,
-                        &small_font,
-                        75,
-                        150,
-                        Color::RGB(0, 255, 0),
-                        &format!("Final Score: {}", final_score),
-                    );
+                    if final_score > 0 {
+                        printtext(
+                            texture_canvas,
+                            &texture_creator,
+                            &small_font,
+                            75,
+                            150,
+                            Color::RGB(0, 255, 0),
+                            &format!("Final Score: {}", final_score),
+                        );
+                    }
 
                     if final_score > 0 {
                         printtext(
@@ -687,6 +690,14 @@ fn main() -> std::io::Result<()> {
                             Color::RGB(255, 255, 255),
                             &score_menu.input,
                         );
+                    }
+
+                    if final_score == 0 {
+                        let mut start_y = 150;
+                        for item in &score_menu.scores {
+                            printtext(texture_canvas, &texture_creator, &small_font, 175, start_y, Color::RGB(255, 0, 0), &format!("{}: {}", item.0, item.1));
+                            start_y += 20;
+                        }
                     }
                 });
             }

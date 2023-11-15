@@ -215,7 +215,7 @@ pub mod game {
                 && self.piece[2].y + 1 < (TILE_H as i32) - 1
                 && self.blocks[self.piece[2].x as usize][(self.piece[2].y as usize) + 1].color != 0
             {
-                self.reset_game();
+                //self.reset_game();
                 self.game_over = true;
                 return;
             }
