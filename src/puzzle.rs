@@ -22,6 +22,7 @@ pub mod game {
         width: i32,
         height: i32,
         piece: [Block; 3],
+        pub next_piece: [Block; 3],
         pub score: u32,
         pub game_over: bool,
         piece_shape: i32,
@@ -47,6 +48,11 @@ pub mod game {
                     y: 0,
                     color: 0,
                 }; 3],
+                next_piece: [Block {
+                    x: 0,
+                    y: 0,
+                    color: 0,
+                }; 3],
                 score: 0,
                 game_over: false,
                 piece_shape: 0,
@@ -54,24 +60,36 @@ pub mod game {
             }
         }
 
-        /// create a new puzzle piece
         pub fn new_piece(&mut self) {
+            self.piece = self.next_piece;
+
+            let mut b = [Block {
+                x: 0,
+                y: 0,
+                color: 0,
+            }; 3];
+
+            self.new_piece_next(&mut b);
+
+            self.next_piece = b;
+        }
+
+        /// create a new puzzle piece
+        pub fn new_piece_next(&mut self, piece: &mut [Block; 3]) {
             let mut rng = rand::thread_rng();
-            self.piece[0].x = (TILE_W / 2) as i32 - 1;
-            self.piece[0].y = 0;
-            self.piece[0].color = rng.gen_range(1..10);
-            self.piece[1].x = (TILE_W / 2) as i32 - 1;
-            self.piece[1].y = 1;
-            self.piece[1].color = rng.gen_range(1..10);
-            self.piece[2].x = (TILE_W / 2) as i32 - 1;
-            self.piece[2].y = 2;
-            self.piece[2].color = rng.gen_range(1..10);
-            while self.piece[0].color == self.piece[1].color
-                || self.piece[0].color == self.piece[2].color
-            {
-                self.piece[0].color = rng.gen_range(1..10);
-                self.piece[1].color = rng.gen_range(1..10);
-                self.piece[2].color = rng.gen_range(1..10);
+            piece[0].x = (TILE_W / 2) as i32 - 1;
+            piece[0].y = 0;
+            piece[0].color = rng.gen_range(1..10);
+            piece[1].x = (TILE_W / 2) as i32 - 1;
+            piece[1].y = 1;
+            piece[1].color = rng.gen_range(1..10);
+            piece[2].x = (TILE_W / 2) as i32 - 1;
+            piece[2].y = 2;
+            piece[2].color = rng.gen_range(1..10);
+            while piece[0].color == piece[1].color || piece[0].color == piece[2].color {
+                piece[0].color = rng.gen_range(1..10);
+                piece[1].color = rng.gen_range(1..10);
+                piece[2].color = rng.gen_range(1..10);
             }
             self.piece_shape = 0;
         }
@@ -83,7 +101,23 @@ pub mod game {
                     self.blocks[x as usize][y as usize].color = 0;
                 }
             }
-            self.new_piece();
+            //self.new_piece();
+            let mut b = [Block {
+                x: 0,
+                y: 0,
+                color: 0,
+            }; 3];
+
+            let mut n = [Block {
+                x: 0,
+                y: 0,
+                color: 0,
+            }; 3];
+
+            self.new_piece_next(&mut b);
+            self.new_piece_next(&mut n);
+            self.piece = b;
+            self.next_piece = n;
             self.score = 0;
             self.lines = 0;
         }

@@ -482,6 +482,27 @@ fn main() -> std::io::Result<()> {
                         &format!("Tabs: {}", grid.lines),
                     );
                     draw_grid(&grid, texture_canvas, &blocks);
+                    texture_canvas
+                        .copy(
+                            &blocks[grid.next_piece[0].color as usize],
+                            None,
+                            sdl2::rect::Rect::new(510, 200, 32, 16),
+                        )
+                        .expect("on copy");
+                    texture_canvas
+                        .copy(
+                            &blocks[grid.next_piece[1].color as usize],
+                            None,
+                            sdl2::rect::Rect::new(510, 200 + 16, 32, 16),
+                        )
+                        .expect("on copy");
+                    texture_canvas
+                        .copy(
+                            &blocks[grid.next_piece[2].color as usize],
+                            None,
+                            sdl2::rect::Rect::new(510, 200 + 32, 32, 16),
+                        )
+                        .expect("on copy");
                 });
 
                 if tick_count > difficulty {
@@ -695,7 +716,15 @@ fn main() -> std::io::Result<()> {
                     if final_score == 0 {
                         let mut start_y = 150;
                         for item in &score_menu.scores {
-                            printtext(texture_canvas, &texture_creator, &small_font, 175, start_y, Color::RGB(255, 0, 0), &format!("{}: {}", item.0, item.1));
+                            printtext(
+                                texture_canvas,
+                                &texture_creator,
+                                &small_font,
+                                175,
+                                start_y,
+                                Color::RGB(255, 0, 0),
+                                &format!("{}: {}", item.0, item.1),
+                            );
                             start_y += 20;
                         }
                     }
