@@ -240,6 +240,8 @@ fn main() -> std::io::Result<()> {
     let mut tabs = 0;
     let mut grid = Grid::new(8, 17);
     let mut difficulty = 1000;
+    let mut final_score = 0;
+    
     'main: loop {
         for _event in e.poll_iter() {
             match _event {
@@ -458,6 +460,10 @@ fn main() -> std::io::Result<()> {
                     tick_count = 0;
                 }
                 grid.proc_blocks();
+                if grid.game_over {
+                    final_score = grid.score;
+                    screen = Screen::GameOver;
+                }
             }
             Screen::Options => {
                 let _result = can.with_texture_canvas(&mut texture, |texture_canvas| {
