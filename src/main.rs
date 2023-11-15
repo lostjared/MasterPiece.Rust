@@ -9,6 +9,7 @@ mod scores;
 use puzzle::game;
 use puzzle::game::Grid;
 use rand::Rng;
+use scores::high_scores::ScoreMenu;
 use sdl2::event::Event;
 use sdl2::keyboard::Keycode;
 use sdl2::pixels::Color;
@@ -236,12 +237,11 @@ fn main() -> std::io::Result<()> {
     let mut cursor_pos = 0;
     let mut opt_cursor_pos: usize = 0;
     let mut opt_index: [i32; 3] = [0, 0, 5];
-    let mut score = 0;
-    let mut tabs = 0;
     let mut grid = Grid::new(8, 17);
     let mut difficulty = 1000;
     let mut final_score = 0;
-
+    let mut score_menu = ScoreMenu::new();
+    score_menu.load();
     'main: loop {
         for _event in e.poll_iter() {
             match _event {
@@ -372,6 +372,7 @@ fn main() -> std::io::Result<()> {
                     Screen::Start => match cursor_pos {
                         0 => {
                             screen = Screen::Game;
+                            grid = Grid::new(8, 17);
                             grid.reset_game();
                             match opt_index[0] {
                                 0 => {
@@ -403,6 +404,33 @@ fn main() -> std::io::Result<()> {
                     }
                     _ => {}
                 },
+
+                Event::KeyDown { keycode: key, .. } => {
+                    if screen == Screen::GameOver {
+                        if key == Some(Keycode::Backspace) {
+                            score_menu.input.pop();
+                        }
+                        if key == Some(Keycode::Return) {
+                            //enter
+                            if !score_menu.input.is_empty() {
+                                let s = (String::from(&score_menu.input), final_score);
+                                score_menu.scores.push(s);
+                                score_menu.sort_scores();
+                                score_menu.input = String::new();
+                                final_score = 0;
+                            }
+                        }
+                    }
+                }
+                Event::TextInput {
+                    timestamp: _,
+                    window_id: _,
+                    text: s,
+                } => {
+                    if screen == Screen::GameOver {
+                        score_menu.type_key(&s);
+                    }
+                }
                 _ => {}
             }
         }
@@ -636,6 +664,30 @@ fn main() -> std::io::Result<()> {
                         Color::RGB(0, 255, 0),
                         &format!("Final Score: {}", final_score),
                     );
+
+                    if final_score > 0 {
+                        printtext(
+                            texture_canvas,
+                            &texture_creator,
+                            &small_font,
+                            75,
+                            200,
+                            Color::RGB(255, 255, 255),
+                            "Enter your name: ",
+                        );
+                    }
+
+                    if score_menu.input.len() > 0 {
+                        printtext(
+                            texture_canvas,
+                            &texture_creator,
+                            &small_font,
+                            75,
+                            225,
+                            Color::RGB(255, 255, 255),
+                            &score_menu.input,
+                        );
+                    }
                 });
             }
         }
