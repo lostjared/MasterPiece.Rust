@@ -414,12 +414,11 @@ fn main() -> std::io::Result<()> {
                 Event::KeyDown {
                     keycode: Some(Keycode::Backspace),
                     ..
-                } => match screen {
-                    Screen::GameOver => {
+                } => {
+                    if screen == Screen::GameOver {
                         score_menu.input.pop();
                     }
-                    _ => {}
-                },
+                }
                 Event::TextInput {
                     timestamp: _,
                     window_id: _,
