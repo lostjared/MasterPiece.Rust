@@ -698,7 +698,7 @@ fn main() -> std::io::Result<()> {
                         );
                     }
 
-                    if score_menu.input.len() > 0 {
+                    if !score_menu.input.is_empty() {
                         printtext(
                             texture_canvas,
                             &texture_creator,
