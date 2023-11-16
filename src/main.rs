@@ -392,7 +392,7 @@ fn main() -> std::io::Result<()> {
                         }
                         3 => {
                             println!("Exiting...\n");
-                            std::process::exit(0);
+                            return Ok(());
                         }
                         _ => {}
                     },
