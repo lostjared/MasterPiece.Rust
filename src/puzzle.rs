@@ -279,16 +279,11 @@ pub mod game {
 
         /// check whether there is room for a block in the grid
         pub fn check_block(&mut self, color: i32, x: i32, y: i32) -> bool {
-            if x >= 0
+             x >= 0
                 && x < (TILE_W as i32)
                 && y >= 0
                 && y < (TILE_H as i32)
                 && color == self.blocks[x as usize][y as usize].color
-            {
-                true
-            } else {
-                false
-            }
         }
 
         /// process the block move down
