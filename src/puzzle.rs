@@ -11,8 +11,6 @@ pub mod game {
         pub color: i32,
     }
 
-    pub const WINDOW_WIDTH: usize = 1280;
-    pub const WINDOW_HEIGHT: usize = 720;
     pub const TILE_W: usize = 8;
     pub const TILE_H: usize = 17;
 

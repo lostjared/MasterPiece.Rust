@@ -105,7 +105,6 @@ fn draw_grid(
     let offset_x = 185;
     let offset_y = 95;
 
-    let offset = 0;
     for x in 0..grid.get_width() as usize {
         for y in 0..grid.get_height() as usize {
             let color = grid.get_grid_point(x, y);
@@ -217,7 +216,6 @@ fn main() -> std::io::Result<()> {
     let small_font = ttf_context
         .load_font("./img/arial.ttf", 12)
         .expect("on load font");
-    let tc = can.texture_creator();
     let _text_surf = font
         .render("Hello, World!")
         .blended(Color::RGB(255, 255, 255))
@@ -268,7 +266,6 @@ fn main() -> std::io::Result<()> {
                     Screen::Credits => {
                         screen = Screen::Start;
                     }
-                    _ => {}
                 },
                 Event::KeyDown {
                     keycode: Some(Keycode::Up),
