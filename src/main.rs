@@ -326,7 +326,7 @@ fn main() -> std::io::Result<()> {
                     ..
                 } => match screen {
                     Screen::Options => {
-                        if opt_index[opt_cursor_pos] > 0 {
+                        if opt_index[opt_cursor_pos] > 1 {
                             opt_index[opt_cursor_pos] -= 1;
                         }
                     }
