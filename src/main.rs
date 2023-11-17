@@ -440,6 +440,8 @@ fn main() -> std::io::Result<()> {
         if start_time == 0 {
             start_time = tick_count / 1000;
         }
+        grid.increase = opt_index[2];
+
         match screen {
             Screen::Intro => {
                 let _result = can.with_texture_canvas(&mut texture, |texture_canvas| {
