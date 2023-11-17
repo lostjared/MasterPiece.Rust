@@ -308,6 +308,7 @@ pub mod game {
         pub fn check_score(&mut self) {
             if (self.lines % self.increase) == 0 {
                 self.diff -= 50;
+                println!("Diffiuclty Level: {}", self.diff);
             }
         }
 
