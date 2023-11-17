@@ -236,7 +236,7 @@ fn main() -> std::io::Result<()> {
     let mut opt_cursor_pos: usize = 0;
     let mut opt_index: [i32; 3] = [0, 0, 5];
     let mut grid = Grid::new(8, 17);
-    let mut difficulty = 1000;
+    grid.diff = 750;
     let mut final_score = 0;
     let mut score_menu = ScoreMenu::new();
     score_menu.load();
@@ -373,13 +373,13 @@ fn main() -> std::io::Result<()> {
                             grid.reset_game();
                             match opt_index[0] {
                                 0 => {
-                                    difficulty = 1250;
+                                    grid.diff = 1250;
                                 }
                                 1 => {
-                                    difficulty = 1000;
+                                    grid.diff = 1000;
                                 }
                                 2 => {
-                                    difficulty = 750;
+                                    grid.diff = 750;
                                 }
                                 _ => {}
                             }
@@ -501,7 +501,7 @@ fn main() -> std::io::Result<()> {
                         .expect("on copy");
                 });
 
-                if tick_count > difficulty {
+                if tick_count > grid.diff as u64 {
                     grid.move_down();
                     tick_count = 0;
                 }

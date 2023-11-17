@@ -25,6 +25,8 @@ pub mod game {
         pub game_over: bool,
         piece_shape: i32,
         pub lines: i32,
+        pub diff: i32,
+        pub increase: i32,
     }
 
     impl Grid {
@@ -55,6 +57,8 @@ pub mod game {
                 game_over: false,
                 piece_shape: 0,
                 lines: 0,
+                diff: 1000,
+                increase: 5,
             }
         }
 
@@ -301,6 +305,12 @@ pub mod game {
             }
         }
 
+        pub fn check_score(&mut self) {
+            if (self.lines % self.increase) == 0 {
+                self.diff -= 50;
+            }
+        }
+
         /// process the blocks
         pub fn proc_blocks(&mut self) {
             for x in 0..self.get_width() {
@@ -324,6 +334,7 @@ pub mod game {
                             }
                             self.score += 1;
                             self.lines += 1;
+                            self.check_score();
                             return;
                         }
                         if self.check_block(color, x, y + 1) && self.check_block(color, x, y + 2) {
@@ -342,6 +353,7 @@ pub mod game {
 
                             self.score += 1;
                             self.lines += 1;
+                            self.check_score();
                             return;
                         }
                         if self.check_block(color, x + 1, y + 1)
@@ -362,6 +374,7 @@ pub mod game {
 
                             self.score += 2;
                             self.lines += 1;
+                            self.check_score();
                             return;
                         }
                         if self.check_block(color, x + 1, y - 1)
@@ -381,6 +394,7 @@ pub mod game {
                             }
                             self.score += 2;
                             self.lines += 1;
+                            self.check_score();
                             return;
                         }
                         /*
