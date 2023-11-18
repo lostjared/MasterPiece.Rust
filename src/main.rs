@@ -326,11 +326,24 @@ fn main() -> std::io::Result<()> {
                     keycode: Some(Keycode::Left),
                     ..
                 } => match screen {
-                    Screen::Options => {
-                        if opt_index[opt_cursor_pos] > 1 {
-                            opt_index[opt_cursor_pos] -= 1;
+                    Screen::Options => match opt_cursor_pos {
+                        0 => {
+                            if opt_index[opt_cursor_pos] > 0 {
+                                opt_index[opt_cursor_pos] -= 1;
+                            }
                         }
-                    }
+                        1 => {
+                            if opt_index[opt_cursor_pos] > 0 {
+                                opt_index[opt_cursor_pos] -= 1;
+                            }
+                        }
+                        2 => {
+                            if opt_index[opt_cursor_pos] > 1 {
+                                opt_index[opt_cursor_pos] -= 1;
+                            }
+                        }
+                        _ => {}
+                    },
                     Screen::Game => {
                         grid.move_left();
                     }
@@ -624,9 +637,12 @@ fn main() -> std::io::Result<()> {
                         "Open Source, Open Mind",
                     );
                     texture_canvas
-                        .copy(&images[4], None, sdl2::rect::Rect::new(640-300, 480-300, 240, 240))
+                        .copy(
+                            &images[4],
+                            None,
+                            sdl2::rect::Rect::new(640 - 300, 480 - 300, 240, 240),
+                        )
                         .expect("on copy");
-                  
                 });
             }
             Screen::Start => {
