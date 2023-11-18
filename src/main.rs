@@ -60,6 +60,7 @@ fn load_gfx(
         "./img/start.bmp",
         "./img/gamebg.bmp",
         "./img/cursor.bmp",
+        "./img/logo.bmp",
     ];
     for i in &image_strings {
         let mut surf = sdl2::surface::Surface::load_bmp(&i).unwrap();
@@ -198,7 +199,7 @@ fn main() -> std::io::Result<()> {
     let sdl = sdl2::init().unwrap();
     let video = sdl.video().unwrap();
     let window = video
-        .window("MasterPiece - Rust Edition", width, height)
+        .window("MasterPiece - [ Rust Edition ]", width, height)
         .resizable()
         .opengl()
         .build()
@@ -622,6 +623,10 @@ fn main() -> std::io::Result<()> {
                         Color::RGB(255, 0, 0),
                         "Open Source, Open Mind",
                     );
+                    texture_canvas
+                        .copy(&images[4], None, sdl2::rect::Rect::new(640-300, 480-300, 240, 240))
+                        .expect("on copy");
+                  
                 });
             }
             Screen::Start => {
