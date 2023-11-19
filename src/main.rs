@@ -338,7 +338,7 @@ fn main() -> std::io::Result<()> {
                                 opt_index[opt_cursor_pos] -= 1;
                                 unsafe {
                                     let _result = sdl2::sys::SDL_SetWindowFullscreen(window_id, 0);
-                                    sdl2::sys::SDL_SetWindowSize(window_id, 1440, 1080);
+                                    sdl2::sys::SDL_SetWindowSize(window_id, width as i32, height as i32);
                                 }
                             }
                         }
@@ -368,10 +368,8 @@ fn main() -> std::io::Result<()> {
                             if opt_index[opt_cursor_pos] < 1 {
                                 opt_index[opt_cursor_pos] += 1;
                                 unsafe {
-                                    let _result = sdl2::sys::SDL_SetWindowFullscreen(window_id, 1);
-                                    
+                                    let _result = sdl2::sys::SDL_SetWindowFullscreen(window_id, 1);                                    
                                 }                        
-
                             }
                         }
                         2 => {
