@@ -204,6 +204,7 @@ fn main() -> std::io::Result<()> {
         .opengl()
         .build()
         .unwrap();
+    let window_id = window.raw();
     let mut can = window
         .into_canvas()
         .build()
@@ -335,6 +336,9 @@ fn main() -> std::io::Result<()> {
                         1 => {
                             if opt_index[opt_cursor_pos] > 0 {
                                 opt_index[opt_cursor_pos] -= 1;
+                                unsafe {
+                                    let _result = sdl2::sys::SDL_SetWindowFullscreen(window_id, 0);
+                                }
                             }
                         }
                         2 => {
@@ -362,6 +366,10 @@ fn main() -> std::io::Result<()> {
                         1 => {
                             if opt_index[opt_cursor_pos] < 1 {
                                 opt_index[opt_cursor_pos] += 1;
+                                unsafe {
+                                    let _result = sdl2::sys::SDL_SetWindowFullscreen(window_id, 1);
+                                }                        
+
                             }
                         }
                         2 => {
