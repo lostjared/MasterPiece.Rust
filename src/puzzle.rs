@@ -312,6 +312,24 @@ pub mod game {
             }
         }
 
+        pub fn flash_colors(&mut self) {
+            for x in 0..self.get_width() {
+                for y in 0..self.get_height() {
+                    let xpos: usize = x as usize;
+                    let ypos: usize = y as usize;
+                    let mut color: i32 = self.blocks[xpos][ypos].color;
+                    if color < 0 {
+                        color -= 1;
+                        if color < -1 {
+                            self.blocks[xpos][ypos].color = 0;
+                        } else {
+                            self.blocks[xpos][ypos].color = color;
+                        }
+                    }
+                }
+            }
+        }
+
         /// process the blocks
         pub fn proc_blocks(&mut self) {
             for x in 0..self.get_width() {
@@ -408,14 +426,7 @@ pub mod game {
                             self.score += 2;
                             return;
                         }*/
-                    } else if color < 0 {
-                        color -= 1;
-                        if color < -90 {
-                            self.blocks[xpos][ypos].color = 0;
-                        } else {
-                            self.blocks[xpos][ypos].color = color;
-                        }
-                    }
+                    } 
                 }
             }
             self.proc_move_down();

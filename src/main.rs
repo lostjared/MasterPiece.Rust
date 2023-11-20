@@ -196,6 +196,10 @@ fn main() -> std::io::Result<()> {
         width = args[1].parse().unwrap();
         height = args[2].parse().unwrap();
     }
+
+    println!("MasterPiece - [ Rust Edition ]");
+    println!("Started at Resoution {}x{}", width, height);
+
     let sdl = sdl2::init().unwrap();
     let video = sdl.video().unwrap();
     let window = video
@@ -233,6 +237,8 @@ fn main() -> std::io::Result<()> {
     let mut screen = Screen::Intro;
     let mut prev_tick = 0;
     let mut tick_count = 0;
+    let mut tick_count2 = 0;
+
     let mut start_time = 0;
     let mut cursor_pos = 0;
     let mut opt_cursor_pos: usize = 0;
@@ -459,6 +465,7 @@ fn main() -> std::io::Result<()> {
         let ptick = tick - prev_tick;
         prev_tick = tick;
         tick_count += ptick;
+        tick_count2 += ptick;
         if start_time == 0 {
             start_time = tick_count / 1000;
         }
@@ -529,6 +536,12 @@ fn main() -> std::io::Result<()> {
                     grid.move_down();
                     tick_count = 0;
                 }
+
+                if tick_count2 > 1000 as u64 {
+                    grid.flash_colors();
+                    tick_count2 = 0;
+                }
+
                 grid.proc_blocks();
                 if grid.game_over {
                     final_score = grid.score;
