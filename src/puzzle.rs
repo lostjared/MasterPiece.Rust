@@ -336,7 +336,7 @@ pub mod game {
                 for y in 0..self.get_height() {
                     let xpos: usize = x as usize;
                     let ypos: usize = y as usize;
-                    let mut color: i32 = self.blocks[xpos][ypos].color;
+                    let color: i32 = self.blocks[xpos][ypos].color;
                     if color >= 1 {
                         if self.check_block(color, x + 1, y) && self.check_block(color, x + 2, y) {
                             self.blocks[xpos][ypos].color = -1;
