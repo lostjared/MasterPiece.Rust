@@ -202,12 +202,16 @@ fn main() -> std::io::Result<()> {
 
     let sdl = sdl2::init().unwrap();
     let video = sdl.video().unwrap();
-    let window = video
+    let mut window = video
         .window("MasterPiece - [ Rust Edition ]", width, height)
         .resizable()
         .opengl()
         .build()
         .unwrap();
+
+    let ico = sdl2::surface::Surface::load_bmp("./img/icon.bmp").unwrap();
+    window.set_icon(ico);
+
     let window_id = window.raw();
     let mut can = window
         .into_canvas()
