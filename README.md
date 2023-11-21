@@ -1,7 +1,7 @@
 # MasterPiece.Rust
 MasterPiece Puzzle Game - Rust Edition
 
-This is going to be a Recode of one of my first projects but this time in Rust.
+This is going to be a Recode of one of my first C++ projects but this time in Rust.
 
 How to Play:
 Arrow keys Move blocks A and S shift blocks Z and X rotate blocks
