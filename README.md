@@ -4,8 +4,9 @@ MasterPiece Puzzle Game - Rust Edition
 This is going to be a Recode of one of my first C++ projects but this time in Rust.
 
 How to Play:
-Arrow keys Move blocks A and S shift blocks Z and X rotate blocks
-line up 3 or more in a row horizontal, vertical, or diagonal.
+Arrow keys Move blocks A and S rotate blocks Up arrow to shift colors
+line up 3 or more in a row horizontal, vertical, or diagonal of the same color to clear.
+Clear as many lines as possible before running out of space. As you progress difficulty increases.
 
 
 Screen shots
