@@ -541,7 +541,7 @@ fn main() -> std::io::Result<()> {
                     tick_count = 0;
                 }
 
-                if tick_count2 > 1000 as u64 {
+                if tick_count2 > 1000u64 {
                     grid.flash_colors();
                     tick_count2 = 0;
                 }
