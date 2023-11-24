@@ -659,7 +659,7 @@ fn main() -> std::io::Result<()> {
                         75,
                         200,
                         Color::RGB(255, 0, 0),
-                        "Open Source, Open Mind",
+                        "\"Open Source, Open Mind\"",
                     );
                     texture_canvas
                         .copy(
