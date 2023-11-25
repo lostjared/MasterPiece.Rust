@@ -1,6 +1,7 @@
 /*
   MasterPiece - Rust Edition
   GPL v3
+  coded by Jared Bruni in 2023
 */
 
 mod puzzle;
