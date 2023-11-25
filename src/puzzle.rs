@@ -1,3 +1,8 @@
+/*
+  MasterPiece - Rust Edition
+  GPL v3
+*/
+
 /// game module
 pub mod game {
 

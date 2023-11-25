@@ -1,4 +1,9 @@
 //! High Scores Module
+/*
+  MasterPiece - Rust Edition
+  GPL v3
+*/
+
 pub mod high_scores {
 
     use std::fs;
