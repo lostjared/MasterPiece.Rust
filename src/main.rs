@@ -27,7 +27,7 @@ enum Screen {
     Options,
     Credits,
 }
-
+/// print text to texture
 fn printtext(
     can: &mut sdl2::render::Canvas<sdl2::video::Window>,
     tex: &sdl2::render::TextureCreator<sdl2::video::WindowContext>,
@@ -52,6 +52,7 @@ fn printtext(
     .expect("on font copy");
 }
 
+/// load graphics
 fn load_gfx(
     texture_creator: &sdl2::render::TextureCreator<sdl2::video::WindowContext>,
 ) -> Vec<sdl2::render::Texture> {
@@ -71,7 +72,7 @@ fn load_gfx(
     }
     images
 }
-
+/// load block graphics
 fn load_blocks(
     texture_creator: &sdl2::render::TextureCreator<sdl2::video::WindowContext>,
 ) -> Vec<sdl2::render::Texture> {
@@ -99,6 +100,7 @@ fn load_blocks(
     images
 }
 
+/// draw the game grid
 fn draw_grid(
     grid: &game::Grid,
     can: &mut sdl2::render::Canvas<sdl2::video::Window>,
@@ -189,6 +191,7 @@ fn draw_grid(
     .expect("draw rect");
 }
 
+/// main function
 fn main() -> std::io::Result<()> {
     let mut width = 1440;
     let mut height = 1080;
