@@ -762,6 +762,9 @@ fn main() -> std::io::Result<()> {
                     }
 
                     if final_score == 0 {
+
+                        printtext(texture_canvas, &texture_creator, &small_font, 175, 125, Color::RGB(0,0,255), "High Scores");
+
                         let mut start_y = 150;
                         for item in &score_menu.scores {
                             printtext(
