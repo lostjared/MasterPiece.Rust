@@ -352,7 +352,11 @@ fn main() -> std::io::Result<()> {
                                 opt_index[opt_cursor_pos] -= 1;
                                 unsafe {
                                     let _result = sdl2::sys::SDL_SetWindowFullscreen(window_id, 0);
-                                    sdl2::sys::SDL_SetWindowSize(window_id, width as i32, height as i32);
+                                    sdl2::sys::SDL_SetWindowSize(
+                                        window_id,
+                                        width as i32,
+                                        height as i32,
+                                    );
                                 }
                             }
                         }
@@ -382,8 +386,8 @@ fn main() -> std::io::Result<()> {
                             if opt_index[opt_cursor_pos] < 1 {
                                 opt_index[opt_cursor_pos] += 1;
                                 unsafe {
-                                    let _result = sdl2::sys::SDL_SetWindowFullscreen(window_id, 1);                                    
-                                }                        
+                                    let _result = sdl2::sys::SDL_SetWindowFullscreen(window_id, 1);
+                                }
                             }
                         }
                         2 => {
@@ -762,8 +766,15 @@ fn main() -> std::io::Result<()> {
                     }
 
                     if final_score == 0 {
-
-                        printtext(texture_canvas, &texture_creator, &small_font, 175, 125, Color::RGB(0,0,255), "High Scores");
+                        printtext(
+                            texture_canvas,
+                            &texture_creator,
+                            &small_font,
+                            175,
+                            125,
+                            Color::RGB(0, 0, 255),
+                            "High Scores",
+                        );
 
                         let mut start_y = 150;
                         for item in &score_menu.scores {

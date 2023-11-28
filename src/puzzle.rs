@@ -431,7 +431,7 @@ pub mod game {
                             self.score += 2;
                             return;
                         }*/
-                    } 
+                    }
                 }
             }
             self.proc_move_down();
