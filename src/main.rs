@@ -18,6 +18,7 @@ use sdl2::rect::Rect;
 use sdl2::render::TextureQuery;
 use std::time::{SystemTime, UNIX_EPOCH};
 
+/// enum for the different Scireens.
 #[derive(PartialEq)]
 enum Screen {
     Intro,
