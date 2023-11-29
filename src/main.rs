@@ -770,7 +770,7 @@ fn main() -> std::io::Result<()> {
                             texture_canvas,
                             &texture_creator,
                             &small_font,
-                            175,
+                            145,
                             125,
                             Color::RGB(0, 0, 255),
                             "High Scores",
