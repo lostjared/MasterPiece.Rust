@@ -2,7 +2,7 @@
 MasterPiece Puzzle Game - Rust Edition
 This originally was a project I worked on when I was a teenager learning C++. I made a typo and misspelled the name of the game.
 I kept the graphics for this version so it looks like the original version. It was based on an Atari 2600 ROM I had been playing at the time.
-I recoded this game from scratch in Rust trying to keep the same look as the original.
+I recoded this game from scratch in Rust trying to keep the same look as the original. Works for Windows/Linux/MacOS
 
 
 How to Play:
