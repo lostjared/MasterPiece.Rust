@@ -56,7 +56,7 @@ fn printtext(
 /// load graphics
 fn load_gfx(
     texture_creator: &sdl2::render::TextureCreator<sdl2::video::WindowContext>,
-) -> Vec<sdl2::render::Texture> {
+) -> Vec<sdl2::render::Texture<'_>> {
     let mut images = Vec::new();
     let image_strings = vec![
         "./img/intro.bmp",
@@ -73,10 +73,10 @@ fn load_gfx(
     }
     images
 }
-/// load block graphics
+
 fn load_blocks(
     texture_creator: &sdl2::render::TextureCreator<sdl2::video::WindowContext>,
-) -> Vec<sdl2::render::Texture> {
+) -> Vec<sdl2::render::Texture<'_>> {
     let mut images = Vec::new();
     let image_strings = vec![
         "./img/block_black.bmp",
