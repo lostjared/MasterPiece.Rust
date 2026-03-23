@@ -194,8 +194,8 @@ fn draw_grid(
 
 /// main function
 fn main() -> std::io::Result<()> {
-    let mut width = 1440;
-    let mut height = 1080;
+    let mut width = 960;
+    let mut height = 720;
     let args: Vec<String> = std::env::args().collect();
     if args.len() > 2 {
         width = args[1].parse().unwrap();
